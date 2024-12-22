@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: always
+    ports:
+      - "80:80"       # HTTP
+      - "443:443"     # HTTPS
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "traefik_letsencrypt:/letsencrypt"
+    command:
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.email=admin@example.com"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--providers.docker=true"
+      - "--providers.docker.network=web"
+      - "--providers.docker.exposedbydefault=false"
+    networks:
+      - web
+
+volumes:
+  traefik_letsencrypt:
+    driver: local
+
+networks:
+  web:
+    external: true
