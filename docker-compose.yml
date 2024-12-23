@@ -12,6 +12,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "traefik_letsencrypt:/letsencrypt"
     command:
+      - "--log.level=DEBUG"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.le.acme.email=tim@thefrenchmachine.fr"
