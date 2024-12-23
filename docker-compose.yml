@@ -31,7 +31,7 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=le"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=auth"
-      - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$JAi964mc$4Rz7l3diy0f.Xnr./Z.j1/"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$$apr1$$JAi964mc$$4Rz7l3diy0f.Xnr./Z.j1/"
     networks:
       - web
 
